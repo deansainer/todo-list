@@ -1,7 +1,7 @@
 body{
     margin: 0px;
     padding: 0px;
-    background-color: rgb(144, 203, 255);
+    background-color: rgb(53, 78, 131);
     display: flex;
     justify-content: center;
 }
@@ -22,6 +22,7 @@ body{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid rgb(201, 201, 201);
+    align-items: center;
 }
 
 .button_container{

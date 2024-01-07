@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import axios from 'axios'
 
-const Modal = ({mode, setShowModal}) => {
+const Modal = ({mode, setShowModal, task, getTodos}) => {
   const editMode = mode === "edit" ? true : false;
 
   const [data, setData] = useState({
-    email: "",
-    title: "",
-    process: "",
-    date: editMode ? "" : new Date(),
+    email: "denys@gmail.com",
+    title: editMode ? task.title : null,
+    progress: editMode ? task.progress : null,
+    date: editMode ? task.date : new Date(),
   });
 
   function handleOnChange(e) {
@@ -17,9 +18,50 @@ const Modal = ({mode, setShowModal}) => {
     setData(data=> ({
       ...data, [name]: value  //overwriting name parameter
     }))
-    console.log(data);
   }
 
+  async function editTodo(e){
+    e.preventDefault()
+    try {
+      const response = await axios.put(`http://localhost:8000/api/todos/${task.id}`, {
+        email: data.email,
+        title: data.title,
+        progress: data.progress,
+        date: data.date,
+      })
+      if (response.status===200){
+        setShowModal(false)
+        getTodos()
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function postTodo(e) {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/todos/',
+        {
+          email: data.email,
+          title: data.title,
+          progress: data.progress,
+          date: data.date,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      if (response.status === 200){
+        setShowModal(false)
+        getTodos()
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   return (
     <div className="overlay">
       <div className="modal">
@@ -49,7 +91,7 @@ const Modal = ({mode, setShowModal}) => {
             name="progress"
           />
 
-          <input className={mode} type="submit"></input>
+          <input onClick={editMode? editTodo : postTodo} className={mode} type="submit"></input>
         </form>
       </div>
     </div>

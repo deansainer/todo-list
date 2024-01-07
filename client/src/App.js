@@ -6,23 +6,24 @@ import ListItem from './components/ListItem'
 function App() {
   const [tasks, setTasks] = useState([])
 
-  useEffect(() => {
-    async function getUsers() {
-      try {
-        const response = await axios.get('http://localhost:8000/api/todos')
-        setTasks(response.data)
-      } catch (error) {
-        console.error(error)
-      }
+  async function getTodos() {
+    try {
+      const response = await axios.get('http://localhost:8000/api/todos')
+      setTasks(response.data)
+    } catch (error) {
+      console.error(error)
     }
-    getUsers()
+  }
+
+  useEffect(() => {
+    getTodos()
   }, [])
 
   return (
     <div className="app">
-      <ListHeader listname={'Holiday Tick List'}/>
+      <ListHeader listname={'Your task list'} getTodos={getTodos}/>
       {tasks.sort((a, b) => new Date(a.date) - new Date(b.date)).map((task) => (
-        <ListItem key={task.id} task={task}/>
+        <ListItem key={task.id} task={task} getTodos={getTodos}/>
       ))}
     </div>
   );
