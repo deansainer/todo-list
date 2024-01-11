@@ -23,7 +23,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
   async function editTodo(e){
     e.preventDefault()
     try {
-      const response = await axios.put(`http://localhost:8000/api/todos/${task.id}`, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/todos/${task.id}`, {
         email: data.email,
         title: data.title,
         progress: data.progress,
@@ -72,7 +72,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
         <form>
           <input
             required
-            maxLength={30}
+            maxLength={50}
             placeholder="Your task goes here"
             name="title"
             value={data.title}
