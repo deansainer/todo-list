@@ -14,7 +14,7 @@ function App() {
       console.error(error)
     }
   }
-
+console.log(process.env.REACT_APP_SERVER_URL);  
   useEffect(() => {
     getTodos()
   }, [])
