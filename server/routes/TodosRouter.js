@@ -7,6 +7,8 @@ router.get('/todos/:id', TodosController.getTodoById)
 router.post('/todos', TodosController.createTodo)
 router.delete('/todos/:id', TodosController.deleteTodo)
 router.put('/todos/:id', TodosController.editTodo)
+router.get('/users', TodosController.getUsers)
+router.post('/users', TodosController.createUser)
 
 
 module.exports = router;

@@ -52,6 +52,27 @@ class TodosController {
             console.error(error);
         }
     }
+
+    async getUsers(req, res){
+        try {
+            const users = await pool.query('select * from users;')
+            res.json(users.rows)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    // sign in
+
+    async createUser(req, res) {
+        try {
+            const {email, password} = req.body;
+            const user = await pool.query('insert into users (email, password) values ($1, $2);', [email, password])
+            res.send(user.rows)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }
 
 module.exports = new TodosController();
