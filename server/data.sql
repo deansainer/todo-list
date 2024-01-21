@@ -9,7 +9,7 @@ CREATE TABLE todos (
 );
 
 create table users(
-    email VARCHAR(255),
+    email VARCHAR(255) PRIMARY KEY,
     password VARCHAR(255)
 );
 

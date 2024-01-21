@@ -3,10 +3,15 @@ import ListHeader from './components/ListHeader'
 import axios from 'axios'
 import ListItem from './components/ListItem'
 import Auth from './components/Auth';
+import { useCookies } from 'react-cookie';
 
 function App() {
-  const authToken = false;
+  const [cookies, setCookies, removeCookies] = useCookies(null)
+  const authToken = cookies.AuthToken
+  const userEmail = cookies.Email
+
   const [tasks, setTasks] = useState([])
+
   async function getTodos() {
     try {
       const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/todos`)

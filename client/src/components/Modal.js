@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import axios from 'axios'
+import {useCookies} from 'react-cookie'
 
 const Modal = ({mode, setShowModal, task, getTodos}) => {
   const editMode = mode === "edit" ? true : false;
+  const [cookies, setCookies, removeCookies] = useCookies(null)
 
   const [data, setData] = useState({
-    email: "denys@gmail.com",
+    email: cookies.Email,
     title: editMode ? task.title : null,
-    progress: editMode ? task.progress : null,
+    progress: editMode ? task.progress : 0,
     date: editMode ? task.date : new Date(),
   });
 
@@ -91,7 +93,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
             name="progress"
           />
 
-          <input onClick={editMode? editTodo : postTodo} className={mode} type="submit"></input>
+          <input onClick={editMode? editTodo : postTodo} className='submit' type="submit"></input>
         </form>
       </div>
     </div>
