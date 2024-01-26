@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
 
@@ -25,7 +24,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
   async function editTodo(e){
     e.preventDefault()
     try {
-      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/todos/${task.id}`, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/todos/${task.id}`, {
         email: data.email,
         title: data.title,
         progress: data.progress,
@@ -44,7 +43,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:8000/api/todos/',
+        `${process.env.REACT_APP_SERVER_URL}/todos/`,
         {
           email: data.email,
           title: data.title,
@@ -58,6 +57,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
       if (response.status === 200){
         setShowModal(false)
         getTodos()
+        window.location.reload()
       }
     } catch (error) {
       console.error(error);

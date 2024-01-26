@@ -28,7 +28,7 @@ const Auth = () => {
       setErrorMessage("The passwords you entered don't match")
     } else {
       try {
-        const response = await axios.post(`http://localhost:8000/api/users/${endpoint}`,
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/${endpoint}`,
          {email: email, password: password},
           {
             headers: { 'Content-Type': 'application/json' },

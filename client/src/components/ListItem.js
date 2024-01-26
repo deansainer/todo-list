@@ -10,7 +10,7 @@ const ListItem = (props) => {
   async function deleteTodo(e) {
     e.preventDefault()
     try {
-      const deletedTodo = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/todos/${props.task.id}`)
+      const deletedTodo = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/todos/${props.task.id}`)
       props.getTodos()
     } catch (error) {
       console.error(error);
