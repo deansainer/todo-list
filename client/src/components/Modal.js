@@ -6,7 +6,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
   const editMode = mode === "edit" ? true : false;
   const [cookies, setCookies, removeCookies] = useCookies(null)
 
-  const [data, setData] = useState({
+  const [modalData, setModalData] = useState({
     email: cookies.Email,
     title: editMode ? task.title : null,
     progress: editMode ? task.progress : 0,
@@ -16,8 +16,8 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
   function handleOnChange(e) {
     const { name, value } = e.target;
 
-    setData(data=> ({
-      ...data, [name]: value  //overwriting name parameter
+    setModalData(modalData=> ({
+      ...modalData, [name]: value  //overwriting name parameter
     }))
   }
 
@@ -25,10 +25,10 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
     e.preventDefault()
     try {
       const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/todos/${task.id}`, {
-        email: data.email,
-        title: data.title,
-        progress: data.progress,
-        date: data.date,
+        email: modalData.email,
+        title: modalData.title,
+        progress: modalData.progress,
+        date: modalData.date,
       })
       if (response.status===200){
         setShowModal(false)
@@ -45,10 +45,10 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/todos/`,
         {
-          email: data.email,
-          title: data.title,
-          progress: data.progress,
-          date: data.date,
+          email: modalData.email,
+          title: modalData.title,
+          progress: modalData.progress,
+          date: modalData.date,
         },
         {
           headers: { 'Content-Type': 'application/json' },
@@ -69,7 +69,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
       <div className="modal">
         <div className="form-title-container">
           <h3>Let's {mode} your task</h3>
-          <img className="close_button" onClick={() => setShowModal(false)} src="https://cdn-icons-png.flaticon.com/128/2734/2734822.png"></img>
+          <img className="close_button" onClick={() => setShowModal(false)} alt="close" src="https://cdn-icons-png.flaticon.com/128/2734/2734822.png"></img>
         </div>
         <form>
           <input
@@ -77,7 +77,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
             maxLength={50}
             placeholder="Your task goes here"
             name="title"
-            value={data.title}
+            value={modalData.title}
             onChange={handleOnChange}
           />
           <br />
@@ -88,7 +88,7 @@ const Modal = ({mode, setShowModal, task, getTodos}) => {
             type="range"
             min={"0"}
             max={"100"}
-            value={data.progress}
+            value={modalData.progress}
             onChange={handleOnChange}
             name="progress"
           />

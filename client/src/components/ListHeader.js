@@ -5,8 +5,7 @@ import {useCookies} from 'react-cookie'
 const ListHeader = ({listname, getTodos}) => {
   const [showModal, setShowModal] = useState(false)
   const [cookies, setCookies, removeCookies] = useCookies(null)
-  
-  const userEmail = cookies.Email
+    
   function signOut() {
     removeCookies('Email')
     removeCookies('AuthToken')
