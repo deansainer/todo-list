@@ -186,3 +186,10 @@ input{
 .submit{
     width: 100%;
 }
+
+.user_email{
+    font-size: 15px;
+    color: gray;
+    float: right;
+    margin-right: 3px;
+}

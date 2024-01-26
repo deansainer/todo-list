@@ -14,12 +14,15 @@ function App() {
 
   async function getTodos() {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/todos`)
-      setTasks(response.data)
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/todos`, {
+        params: { email: userEmail }
+      });
+      setTasks(response.data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
+
  
   useEffect(() => {
     if (authToken){
@@ -29,6 +32,7 @@ function App() {
 
   return (
     <div className="app">
+      {userEmail && <span className='user_email'>{userEmail}</span>}
       {!authToken && <Auth/>}
       {authToken && <>
       <ListHeader listname={tasks.length > 0 ? 'Your task list' : 'Your task list is empty.'} getTodos={getTodos}/>
@@ -36,6 +40,7 @@ function App() {
         <ListItem key={task.id} task={task} getTodos={getTodos}/>
       ))}
       </>}
+
 </div>
   );
 }
