@@ -23,6 +23,7 @@ body{
     justify-content: space-between;
     border-bottom: 1px solid rgb(201, 201, 201);
     align-items: center;
+    font-family: Georgia, serif;
 }
 
 .button_container{
@@ -60,22 +61,30 @@ body{
 }
 
 .edit{
+    padding-left: 20px;
     margin-right: 4px;
     border-radius: 10px;
-    width: 50px;
-}
-.edit:hover{
-    background-color: rgb(174, 194, 255);
+    width: 27px;
+    height: 27px;
 }
 
 .delete{
     margin-right: 4px;
-    width: 50px;
+    width: 27px;
+    height: 27px;
     border-radius: 10px;
 }
 
-.delete:hover{
-    background-color: rgb(174, 194, 255);
+.create{
+    width: 35px;
+    height: 35px;
+}
+
+.sign-out{
+    padding-left: 10px;
+    width: 33px;
+    height: 33px;
+    padding-right: 5px;
 }
 
 .finish{

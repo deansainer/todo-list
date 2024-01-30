@@ -27,8 +27,8 @@ const ListItem = (props) => {
           <input className='slider' type="range" value={props.task.progress} disabled/>
         </div>
       <div className="task_action_buttons">
-        <button onClick={() => setShowModal(true)} className="edit">Edit</button>
-        <button onClick={deleteTodo} className="delete">Del</button>
+        <img src='https://cdn-icons-png.flaticon.com/128/1827/1827933.png' onClick={() => setShowModal(true)} className="edit"/>
+        <img src='https://cdn-icons-png.flaticon.com/128/484/484662.png' onClick={deleteTodo} className="delete"/>
       </div>
       {showModal && <Modal mode={'edit'} setShowModal={setShowModal} task={props.task} getTodos={props.getTodos}/>}
     </li>

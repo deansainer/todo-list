@@ -13,10 +13,10 @@ const ListHeader = ({listname, getTodos}) => {
   }
   return (
     <div className='list-header'>
-      <h2>{listname}</h2>
+      <h1>{listname}</h1>
       <div className='button-container'>
-        <button onClick={() => setShowModal(true)} className='create'> Add new</button>
-        <button onClick={signOut} className='sign-out'> Sign out</button>
+        <img src='https://img.icons8.com/?size=50&id=37839&format=png' onClick={() => setShowModal(true)} className='create'/>
+        <img src='https://img.icons8.com/?size=50&id=8119&format=png' onClick={signOut} className='sign-out'/>
       </div>
       {showModal && <Modal mode={'create'} setShowModal={setShowModal} getTodos={getTodos}/>}
     </div>
